@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nextcont.ecm.fileengine.business.persistence.dao.mapper.TransitionCallbackBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionCallbackBean" >
+    <result column="globalId" property="globalId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="info" property="info" jdbcType="VARCHAR" />
+    <result column="callbackUrl" property="callbackUrl" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionCallbackBean" >
+    insert into transition_callback (globalId, status, info, 
+      callbackUrl,createTime)
+    values (#{globalId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, 
+      #{callbackUrl,jdbcType=VARCHAR}),#{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionCallbackBean" >
+    insert into transition_callback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="globalId != null" >
+        globalId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+      <if test="callbackUrl != null" >
+        callbackUrl,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="globalId != null" >
+        #{globalId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackUrl != null" >
+        #{callbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

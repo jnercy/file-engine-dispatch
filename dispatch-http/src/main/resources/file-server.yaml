@@ -1,0 +1,9 @@
+jdbc:
+ driverClass: "com.mysql.jdbc.Driver"
+ url: "${fastdfs.url}"
+ username: "${fastdfs.username}"
+ password: "${fastdfs.password}"
+
+fastdfs:
+ tracker:
+  addr: "${fastdfs.tracker.addr}"

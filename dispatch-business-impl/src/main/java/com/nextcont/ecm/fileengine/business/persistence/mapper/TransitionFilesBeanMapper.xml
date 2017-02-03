@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nextcont.ecm.fileengine.business.persistence.dao.mapper.TransitionFilesBeanMapper">
+  <resultMap id="BaseResultMap" type="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionFilesBean">
+    <result column="globalId" jdbcType="VARCHAR" property="globalId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="fullpath" jdbcType="VARCHAR" property="fullpath" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="errormsg" jdbcType="VARCHAR" property="errormsg" />
+  </resultMap>
+  <insert id="insert" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionFilesBean">
+    insert into transition_file (globalId, url, type, 
+      duration, location, fullpath, 
+      status, errormsg)
+    values (#{globalId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{duration,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, #{fullpath,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{errormsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionFilesBean">
+    insert into transition_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="globalId != null">
+        globalId,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="fullpath != null">
+        fullpath,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="errormsg != null">
+        errormsg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="globalId != null">
+        #{globalId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="fullpath != null">
+        #{fullpath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="errormsg != null">
+        #{errormsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

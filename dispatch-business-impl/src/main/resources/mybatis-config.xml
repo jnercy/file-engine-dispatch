@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+
+
+    <!-- This is needed if you want to use the @Transactional annotation -->
+    <bean id="dataSource" name="dataSource"
+          class="com.jolbox.bonecp.BoneCPDataSource">
+        <!-- 指定连接数据库的驱动 -->
+        <property name="driverClass" value="${jdbc.driverClassName}" />
+        <!-- 指定连接数据库的URL -->
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <!-- 指定连接数据库的用户名 -->
+        <property name="user" value="${jdbc.username}" />
+        <!-- 指定连接数据库的密码 -->
+        <property name="password" value="${jdbc.password}" />
+        <property name="maxConnectionsPerPartition" value="${jdbc.maxPoolSize}"/>
+        <property name="minConnectionsPerPartition" value="${jdbc.minConnectionsPerPartition}"/>
+        <property name="partitionCount" value="${jdbc.partitionCount}"/>
+        <property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
+        <property name="statementsCacheSize" value="${jdbc.statementsCacheSize}"/>
+    </bean>
+
+
+
+    <!-- 配置SqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis.cfg.xml" />
+        <property name="dataSource" ref="dataSource" />
+        <!-- mapper和resultmap配置路径 -->
+        <property name="mapperLocations">
+            <list>
+                <!-- 表示在com.nextcont.mapper包或以下所有目录中，以*Mapper.xml结尾所有文件 -->
+                <value>classpath:com/nextcont/ecm/fileengine/business/persistence/mapper/**/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- 下面是扫描 包里面的 dao 然后自动注入 sqlSessionFactory -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.nextcont.ecm.fileengine.business.persistence.dao" />
+    </bean>
+
+
+    <!-- 由spring管理mybatis的事物 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+    <!-- ================================事务相关控制================================================= -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.RuntimeException" />
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="find*" propagation="SUPPORTS" />
+            <tx:method name="get*" propagation="SUPPORTS" />
+            <tx:method name="select*" propagation="SUPPORTS" />
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(public * com.nextcont.ecm.fileengine.business.persistence.*.*(..)) " />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
+    </aop:config>
+
+</beans>

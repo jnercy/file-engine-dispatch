@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:registry address="zookeeper://${zk.server}"/>
+
+    <dubbo:annotation package="com.alibaba.dubbo.demo.user.facade" />
+
+    <dubbo:protocol name="dubbo" serialization="kryo" optimizer="com.alibaba.dubbo.demo.SerializationOptimizerImpl"/>
+
+
+    <dubbo:protocol name="rest" port="8111" threads="500"  server="tomcat" accepts="500"/>
+
+    <dubbo:protocol name="http" port="8889"/>
+    <dubbo:protocol name="hessian" port="8890"/>
+    <dubbo:protocol name="webservice" port="8892"/>
+
+
+
+    <!--<dubbo:service interface="com.nextcont.ecm.fileengine.api.TransitionManager" ref="transitionManager" protocol="rest" />-->
+
+    <dubbo:service interface="com.nextcont.ecm.fileengine.api.TransitionManager" ref="transitionManager" protocol="dubbo,rest" />
+
+
+    <dubbo:service interface="com.nextcont.ecm.fileengine.api.CallbackManager" ref="callbackManager" protocol="rest" />
+
+    <dubbo:service interface="com.nextcont.ecm.fileengine.api.DriveManager" ref="driveManager" protocol="rest" />
+
+
+</beans>

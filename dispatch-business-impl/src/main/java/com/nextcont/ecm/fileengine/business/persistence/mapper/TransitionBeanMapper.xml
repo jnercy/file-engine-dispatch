@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nextcont.ecm.fileengine.business.persistence.dao.mapper.TransitionBeanMapper">
+  <resultMap id="BaseResultMap" type="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionBean">
+    <id column="globalId" jdbcType="VARCHAR" property="globalId" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="requesttype" jdbcType="VARCHAR" property="requesttype" />
+    <result column="clientid" jdbcType="VARCHAR" property="clientid" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+    <result column="length" jdbcType="BIGINT" property="length" />
+    <result column="mimetype" jdbcType="VARCHAR" property="mimetype" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="callbackurl" jdbcType="VARCHAR" property="callbackurl" />
+    <result column="md5digest" jdbcType="VARCHAR" property="md5digest" />
+    <result column="alijobid" jdbcType="VARCHAR" property="alijobid" />
+    <result column="filesize" jdbcType="INTEGER" property="filesize" />
+    <result column="callbacktype" jdbcType="VARCHAR" property="callbacktype" />
+    <result column="websocketsessionid" jdbcType="VARCHAR" property="websocketsessionid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    globalId, createdate, requesttype, clientid, filename, length, mimetype, source, 
+    callbackurl, md5digest, alijobid, filesize, callbacktype, websocketsessionid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from transition
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from transition
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionBean">
+    insert into transition (globalId, createdate, requesttype, 
+      clientid, filename, length, 
+      mimetype, source, callbackurl, 
+      md5digest, alijobid, filesize, 
+      callbacktype, websocketsessionid)
+    values (#{globalId,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{requesttype,jdbcType=VARCHAR}, 
+      #{clientid,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{length,jdbcType=BIGINT}, 
+      #{mimetype,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{callbackurl,jdbcType=VARCHAR}, 
+      #{md5digest,jdbcType=VARCHAR}, #{alijobid,jdbcType=VARCHAR}, #{filesize,jdbcType=INTEGER}, 
+      #{callbacktype,jdbcType=VARCHAR}, #{websocketsessionid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionBean">
+    insert into transition
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="globalId != null">
+        globalId,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="requesttype != null">
+        requesttype,
+      </if>
+      <if test="clientid != null">
+        clientid,
+      </if>
+      <if test="filename != null">
+        filename,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="mimetype != null">
+        mimetype,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="callbackurl != null">
+        callbackurl,
+      </if>
+      <if test="md5digest != null">
+        md5digest,
+      </if>
+      <if test="alijobid != null">
+        alijobid,
+      </if>
+      <if test="filesize != null">
+        filesize,
+      </if>
+      <if test="callbacktype != null">
+        callbacktype,
+      </if>
+      <if test="websocketsessionid != null">
+        websocketsessionid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="globalId != null">
+        #{globalId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requesttype != null">
+        #{requesttype,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=BIGINT},
+      </if>
+      <if test="mimetype != null">
+        #{mimetype,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackurl != null">
+        #{callbackurl,jdbcType=VARCHAR},
+      </if>
+      <if test="md5digest != null">
+        #{md5digest,jdbcType=VARCHAR},
+      </if>
+      <if test="alijobid != null">
+        #{alijobid,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="callbacktype != null">
+        #{callbacktype,jdbcType=VARCHAR},
+      </if>
+      <if test="websocketsessionid != null">
+        #{websocketsessionid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionBean">
+    update transition
+    <set>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requesttype != null">
+        requesttype = #{requesttype,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        clientid = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=BIGINT},
+      </if>
+      <if test="mimetype != null">
+        mimetype = #{mimetype,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackurl != null">
+        callbackurl = #{callbackurl,jdbcType=VARCHAR},
+      </if>
+      <if test="md5digest != null">
+        md5digest = #{md5digest,jdbcType=VARCHAR},
+      </if>
+      <if test="alijobid != null">
+        alijobid = #{alijobid,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        filesize = #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="callbacktype != null">
+        callbacktype = #{callbacktype,jdbcType=VARCHAR},
+      </if>
+      <if test="websocketsessionid != null">
+        websocketsessionid = #{websocketsessionid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.TransitionBean">
+    update transition
+    set createdate = #{createdate,jdbcType=TIMESTAMP},
+      requesttype = #{requesttype,jdbcType=VARCHAR},
+      clientid = #{clientid,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      length = #{length,jdbcType=BIGINT},
+      mimetype = #{mimetype,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      callbackurl = #{callbackurl,jdbcType=VARCHAR},
+      md5digest = #{md5digest,jdbcType=VARCHAR},
+      alijobid = #{alijobid,jdbcType=VARCHAR},
+      filesize = #{filesize,jdbcType=INTEGER},
+      callbacktype = #{callbacktype,jdbcType=VARCHAR},
+      websocketsessionid = #{websocketsessionid,jdbcType=VARCHAR}
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </update>
+</mapper>

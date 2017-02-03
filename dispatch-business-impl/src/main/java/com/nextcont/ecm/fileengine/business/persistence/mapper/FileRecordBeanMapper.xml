@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nextcont.ecm.fileengine.business.persistence.dao.mapper.FileRecordBeanMapper">
+  <resultMap id="BaseResultMap" type="com.nextcont.ecm.fileengine.business.persistence.bean.FileRecordBean">
+    <id column="globalId" jdbcType="VARCHAR" property="globalId" />
+    <result column="fid" jdbcType="VARCHAR" property="fid" />
+    <result column="groupName" jdbcType="VARCHAR" property="groupName" />
+    <result column="fileName" jdbcType="VARCHAR" property="fileName" />
+    <result column="extensionsName" jdbcType="VARCHAR" property="extensionsName" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="httpEncoding" jdbcType="VARCHAR" property="httpEncoding" />
+    <result column="fsRawValue" jdbcType="VARCHAR" property="fsRawValue" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    globalId, fid, groupName, fileName, extensionsName, createTime, updateTime, httpEncoding, 
+    fsRawValue, path
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fastdfs_fileRecord
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fastdfs_fileRecord
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.FileRecordBean">
+    insert into fastdfs_fileRecord (globalId, fid, groupName, 
+      fileName, extensionsName, createTime, 
+      updateTime, httpEncoding, fsRawValue, 
+      path)
+    values (#{globalId,jdbcType=VARCHAR}, #{fid,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{extensionsName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{httpEncoding,jdbcType=VARCHAR}, #{fsRawValue,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.FileRecordBean">
+    insert into fastdfs_fileRecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="globalId != null">
+        globalId,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="groupName != null">
+        groupName,
+      </if>
+      <if test="fileName != null">
+        fileName,
+      </if>
+      <if test="extensionsName != null">
+        extensionsName,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="httpEncoding != null">
+        httpEncoding,
+      </if>
+      <if test="fsRawValue != null">
+        fsRawValue,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="globalId != null">
+        #{globalId,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionsName != null">
+        #{extensionsName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="httpEncoding != null">
+        #{httpEncoding,jdbcType=VARCHAR},
+      </if>
+      <if test="fsRawValue != null">
+        #{fsRawValue,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.FileRecordBean">
+    update fastdfs_fileRecord
+    <set>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        groupName = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        fileName = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionsName != null">
+        extensionsName = #{extensionsName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="httpEncoding != null">
+        httpEncoding = #{httpEncoding,jdbcType=VARCHAR},
+      </if>
+      <if test="fsRawValue != null">
+        fsRawValue = #{fsRawValue,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nextcont.ecm.fileengine.business.persistence.bean.FileRecordBean">
+    update fastdfs_fileRecord
+    set fid = #{fid,jdbcType=VARCHAR},
+      groupName = #{groupName,jdbcType=VARCHAR},
+      fileName = #{fileName,jdbcType=VARCHAR},
+      extensionsName = #{extensionsName,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      httpEncoding = #{httpEncoding,jdbcType=VARCHAR},
+      fsRawValue = #{fsRawValue,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR}
+    where globalId = #{globalId,jdbcType=VARCHAR}
+  </update>
+</mapper>
